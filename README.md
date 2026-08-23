@@ -4,7 +4,7 @@ A research implementation of **Queue-Reactive (QR)**, **Deep Queue-Reactive (DQR
 
 The project studies whether event-driven intensity models can reproduce the dynamics of a real limit order book, and how much is gained by moving from a classical queue-size-dependent model to neural point-process models that incorporate **intraday seasonality, event history, cross-level information and order-size distributions**.
 
-The implementation follows and extends the methodology in *Deep Learning Meets Queue-Reactive: A Framework for Realistic Limit Order Book Simulation* (Bodor & Carlier, 2025). The reference paper is included in the repository as [`2501.08822v1.pdf`](2501.08822v1.pdf).
+The implementation follows and extends the methodology in *Deep Learning Meets Queue-Reactive: A Framework for Realistic Limit Order Book Simulation* (Bodor & Carlier, 2025). The reference paper is included in the repository as [`2501.08822v1.pdf`](source/2501.08822v1.pdf).
 
 ## Main results
 
@@ -209,8 +209,9 @@ The notebooks and analysis utilities examine whether generated paths reproduce i
 ```text
 .
 ├── README.md
-├── 2501.08822v1.pdf              Reference paper
+├── Micro_Coursework-7.pdf         Project paper
 └── source/
+    ├── 2501.08822v1.pdf          Reference paper
     ├── 01_data_and_qr_model.ipynb
     ├── 02_dqr_model.ipynb
     ├── 03_mdqr_model.ipynb
