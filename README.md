@@ -79,7 +79,7 @@ This provides an interpretable non-parametric baseline before introducing neural
 
 ### Fitted intensity functions
 
-![Queue-Reactive fitted intensity functions for INTC](QR%20Model%20--%20Fitted%20Intensity%20Functions%20INTC.png)
+![Queue-Reactive fitted intensity functions for INTC](source/QR%20Model%20--%20Fitted%20Intensity%20Functions%20INTC.png)
 
 The figure shows the fitted arrival intensities as functions of queue size for the different event types and levels. The important point is that order flow is **state dependent**: using one constant Poisson arrival rate would discard the relationship between the current liquidity available at a level and the probability of limit orders, cancellations or executions arriving next.
 
@@ -165,7 +165,7 @@ The intensity network determines **which event occurs and when**. SizeNet determ
 
 ### Synthetic LOB simulation
 
-![Synthetic LOB simulation](LOB_Simulation.png)
+![Synthetic LOB simulation](source/LOB_Simulation.png)
 
 The simulator evolves the book event by event using the fitted state-dependent intensities and order-size model. The resulting trajectory is useful as an end-to-end test: errors that appear small in a one-step prediction problem can accumulate during recursive simulation and produce unrealistic spreads, queue sizes or price dynamics.
 
@@ -200,32 +200,33 @@ The notebooks and analysis utilities examine whether generated paths reproduce i
 - intraday volatility patterns;
 - simulated LOB trajectories.
 
-[`Intraday_Volatility_INTC.pdf`](Intraday_Volatility_INTC.pdf) contains an additional empirical volatility diagnostic for INTC, while `roughVolatility.ipynb` explores volatility scaling/roughness separately from the core QR → DQR → MDQR pipeline.
+[`Intraday_Volatility_INTC.pdf`](source/Intraday_Volatility_INTC.pdf) contains an additional empirical volatility diagnostic for INTC, while `roughVolatility.ipynb` explores volatility scaling/roughness separately from the core QR → DQR → MDQR pipeline.
 
 ---
 
 ## 6. Repository structure
 
 ```text
-01_data_and_qr_model.ipynb       Data exploration, preprocessing, QR MLE and baseline simulation
-02_dqr_model.ipynb               Deep Queue-Reactive model and feature ablations
-03_mdqr_model.ipynb              Joint multidimensional model, SizeNet and LOB simulation
-
-lobster.py                       LOBSTER loading and QR-grid preprocessing
-analysis.py                      Intensity estimation and validation utilities
-events.py                        Event representations and event logic
-simulator.py                     Event-driven QR simulation
-functions_part1.py               Supporting QR / preprocessing functions
-functions_part2.py               Supporting DQR / simulation functions
-volatility_functions.py          Volatility analysis utilities
-
-mdqr_net_checkpoint.pth          Saved MDQR intensity-network parameters
-size_net_checkpoint.pth          Saved order-size network parameters
-mdqr_sim*.parquet                Saved synthetic MDQR event paths
-
-QR Model -- Fitted ... INTC.png  QR intensity result figure
-LOB_Simulation.png               Example synthetic LOB trajectory
-Intraday_Volatility_INTC.pdf     Intraday-volatility diagnostic
+.
+├── README.md
+├── 2501.08822v1.pdf              Reference paper
+└── source/
+    ├── 01_data_and_qr_model.ipynb
+    ├── 02_dqr_model.ipynb
+    ├── 03_mdqr_model.ipynb
+    ├── lobster.py
+    ├── analysis.py
+    ├── events.py
+    ├── simulator.py
+    ├── functions_part1.py
+    ├── functions_part2.py
+    ├── volatility_functions.py
+    ├── mdqr_net_checkpoint.pth
+    ├── size_net_checkpoint.pth
+    ├── mdqr_sim*.parquet
+    ├── QR Model -- Fitted ... INTC.png
+    ├── LOB_Simulation.png
+    └── Intraday_Volatility_INTC.pdf
 ```
 
 ---
@@ -244,10 +245,10 @@ Apple Silicon (`MPS`), CUDA and CPU execution are detected by the MDQR notebook.
 
 ### Data layout
 
-LOBSTER data are not bundled as a full dataset. Place the downloaded sample directories under `data/`, for example:
+LOBSTER data are not bundled as a full dataset. Place the downloaded sample directories under `source/data/`, for example:
 
 ```text
-data/
+source/data/
 └── LOBSTER_SampleFile_INTC_2012-06-21_5/
     ├── INTC_2012-06-21_34200000_57600000_message_5.csv
     └── INTC_2012-06-21_34200000_57600000_orderbook_5.csv
@@ -256,11 +257,11 @@ data/
 ### Recommended execution order
 
 ```text
-01_data_and_qr_model.ipynb
+source/01_data_and_qr_model.ipynb
         ↓
-02_dqr_model.ipynb
+source/02_dqr_model.ipynb
         ↓
-03_mdqr_model.ipynb
+source/03_mdqr_model.ipynb
 ```
 
 Notebook 1 establishes the classical benchmark and data pipeline; Notebook 2 isolates the value of richer state variables; Notebook 3 moves to a joint model capable of generating complete synthetic LOB trajectories.
